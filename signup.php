@@ -7,10 +7,11 @@ if(isset($_POST['submit'])){
         $userFirstName = mysqli_escape_string($conn, $_POST ['firstname']);
         $userLastName = mysqli_escape_string($conn, $_POST ['lastname']);
         $userEmail = mysqli_escape_string($conn, $_POST['email']);
+        $number = mysqli_escape_string($conn, $_POST['number']);
         $userNewPassword = mysqli_escape_string($conn, $_POST['password']);
         $userVerifyPassword = mysqli_escape_string($conn, $_POST['verify_password']);
        
-        if(empty($userFirstName) || empty($userLastName) || empty($userEmail) || empty($userNewPassword) || empty($userVerifyPassword)){
+        if(empty($userFirstName) || empty($userLastName) || empty($userEmail) || empty($userNewPassword) || empty($userVerifyPassword) || empty($number)){
             die ("All fields are Required");
             }
             if ( strlen ( $userFirstName ) < 2 || strlen ( $userFirstName ) > 50) {
@@ -46,10 +47,11 @@ if(isset($_POST['submit'])){
                    }
                 else { 
 
-                    $sql = "INSERT INTO users(firstname, lastname, email, password)
+                    $sql = "INSERT INTO users(firstname, lastname, email,number, password)
                     VALUES('$userFirstName', 
                             '$userLastName',
                             '$userEmail',
+                            '$number',
                             '$userNewPassword'       )";
                            
                            $result = mysqli_query($conn , $sql);
@@ -240,6 +242,10 @@ if(isset($_POST['submit'])){
                 <div class="form-group col-md-4 ">
                     <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Your email address" id="emailAddress" name="email"  data-toggle="tooltip" data-placement="bottom" title="Please enter a valid Email Address" required><span class="error"></span>
                 </div>
+                <!---Number--->
+                <div class="form-group col-md-4">
+                    <input type="Number" class="form-control" name="number" id="number" placeholder="Number" ><span class="error"></span>
+                </div>
 
                 <div class="form-group col-md-4">
                     <input class="form-control" type="password" name="password" id="password" class="form-control" placeholder="Your password" data-toggle="tooltip" data-placement="bottom"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -252,6 +258,7 @@ if(isset($_POST['submit'])){
                     <input type="password" class="form-control" name="verify_password" id="confirmPassword" placeholder="Confirm password" data-toggle="tooltip" data-placement="bottom" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
                     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><span class="error"></span>
                 </div>
+                
                 <input id="submitData" name="submit" type="submit" class="btn btn-primary login-btn" value = "Create Account"/>  
 
                

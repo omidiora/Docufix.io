@@ -7,11 +7,11 @@ if(isset($_POST['submit'])){
     // userEmail and userPassword sent from form 
     
     $userEmail = mysqli_real_escape_string($conn,$_POST['email']);
-    $userPassword = mysqli_real_escape_string($conn,$_POST['password']);    
+    $userPassword = mysqli_real_escape_string($conn,$_POST['password']);  
 
 
     $sql1 = "Select * from users where email = '$userEmail'";
-    $query = mysqli_query($conn, $sql1) or die(mysql_error());
+    $query = mysqli_query($conn, $sql1) ;
     $result = mysqli_fetch_assoc($query);
     $count = mysqli_num_rows($query);
     if ($count === 1 ) {
@@ -21,6 +21,8 @@ if(isset($_POST['submit'])){
                 $_SESSION['login_user'] = $userEmail;
                 $_SESSION['loggedin'] = true;
                 $_SESSION['name'] = $result['firstname'];
+                $_SESSION['number'] = $result['number'];
+                $_SESSION['time'] = $result['time'];
                 $_SESSION['login_id'] = $result['id'];
                 header("location: index.php");
             }

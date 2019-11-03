@@ -1,3 +1,10 @@
+<?php
+session_start();
+$message = '';
+
+
+
+?>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8" />
@@ -30,7 +37,7 @@
                         Tools
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item text-justify" href="./fileUpload.html">Compare files</a>
+                            <a class="dropdown-item text-justify" href="./fileUpload.php">Compare files</a>
                             <a class="dropdown-item text-justify" href="./grammarChecker.html">Grammar Check</a>
                             <a class="dropdown-item text-justify" href="./fileDuplicate.html">Check for Duplicates</a>
                         </div>
@@ -38,11 +45,20 @@
                     <li class="nav-item">
                         <a class="nav-link text-center" href="#">Pricing</a>
                     </li>
+                   
+                   
                     <li class="nav-item">
-                        <a class="nav-link text-center" href="login.php">Log In</a>
+                        <a class="nav-link text-center" href="login.php"> <?php if(isset($_SESSION['name'])); 
+                         else  {
+                            echo "login";
+                        } ?></a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link text-center" href="signup.php">Sign Up</a>
+                        <a class="nav-link text-center" href="signup.php"> <?php if(isset($_SESSION['name'])); 
+                         else  {
+                            echo "Sign up";
+                        } ?></a></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-center" href="#">Get Started</a>
@@ -58,7 +74,7 @@
                 <h3>Your Online Document Comparison Solution</h3>
                 <p>Compare documents content and find out the differences in each content of the files without much stress</p>
             </div>
-            <button class="b-btn comp-btn"><a href="./fileUpload.html">Compare files</a></button>
+            <button class="b-btn comp-btn"><a href="fileUpload.php">Compare files</a></button>
             <button class="b-btn dup-btn"><a href="./fileDuplicate.html">Check for duplicates</a></button>
         </div>
 
